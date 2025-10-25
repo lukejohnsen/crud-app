@@ -1,11 +1,9 @@
 package com.aquent.crudapp.person;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import java.util.*;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,42 +15,43 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class DefaultPersonService implements PersonService {
 
-    private final PersonDao personDao;
+    private final PersonRepository personRepository;
     private final Validator validator;
 
-    public DefaultPersonService(PersonDao personDao, Validator validator) {
-        this.personDao = personDao;
+    public DefaultPersonService(PersonRepository personRepository, Validator validator) {
+        this.personRepository = personRepository;
         this.validator = validator;
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Person> listPeople() {
-        return personDao.listPeople();
+    public List<Person> findAll() {
+        return personRepository.findAll();
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public Person readPerson(Integer id) {
-        return personDao.readPerson(id);
+    public Person findPersonById(Integer id) {
+        return personRepository.findById(id).orElse(null);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public Integer createPerson(Person person) {
-        return personDao.createPerson(person);
+        Person savedPerson = personRepository.save(person);
+        return savedPerson.getPersonId();
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public void updatePerson(Person person) {
-        personDao.updatePerson(person);
+        personRepository.save(person);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public void deletePerson(Integer id) {
-        personDao.deletePerson(id);
+        personRepository.deleteById(id);
     }
 
     @Override

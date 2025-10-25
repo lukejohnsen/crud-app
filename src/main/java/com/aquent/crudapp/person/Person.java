@@ -1,41 +1,54 @@
 package com.aquent.crudapp.person;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
 
 /**
  * The person entity corresponding to the "person" table in the database.
  */
+@Entity
+@Table(name = "person")
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "person_id")
     private Integer personId;
 
     @NotNull
     @Size(min = 1, max = 50, message = "First name is required with maximum length of 50")
+    @Column(name = "first_name")
     private String firstName;
 
     @NotNull
     @Size(min = 1, max = 50, message = "Last name is required with maximum length of 50")
+    @Column(name = "last_name")
     private String lastName;
 
     @NotNull
     @Size(min = 1, max = 50, message = "Email address is required with maximum length of 50")
+    @Column(name = "email_address")
     private String emailAddress;
 
     @NotNull
     @Size(min = 1, max = 50, message = "Street address is required with maximum length of 50")
+    @Column(name = "street_address")
     private String streetAddress;
 
     @NotNull
     @Size(min = 1, max = 50, message = "City is required with maximum length of 50")
+    @Column(name = "city")
     private String city;
 
     @NotNull
     @Size(min = 2, max = 2, message = "State is required with length 2")
+    @Column(name = "state")
     private String state;
 
     @NotNull
     @Size(min = 5, max = 5, message = "Zip code is required with length 5")
+    @Column(name = "zip_code")
     private String zipCode;
 
     public Integer getPersonId() {

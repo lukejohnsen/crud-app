@@ -24,3 +24,10 @@ Add client­side styling and validation:
 
 * Using your preferred javascript validation technique, prevent the submission on invalid data on the edit forms and inform the user of errors. The validations implemented on the front­end should be equivalent to the existing server side validation.
 * Add standard styling to the pages using a modern CSS3/HTML5 framework like Twitter Bootstrap or Foundation (or similar).
+
+
+## Luke Notes
+
+* Updated Java to version 17
+* Updated SpringBoot framework to 3+ to work with Java 17
+* Also updated Hibernate Validator to get rid of depreciation errors

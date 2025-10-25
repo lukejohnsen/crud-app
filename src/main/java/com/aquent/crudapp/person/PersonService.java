@@ -15,7 +15,7 @@ public interface PersonService {
      *
      * @return list of person records
      */
-    List<Person> listPeople();
+    List<Person> findAll();
 
     /**
      * Creates a new person record.
@@ -31,7 +31,7 @@ public interface PersonService {
      * @param id the person ID
      * @return the person record
      */
-    Person readPerson(Integer id);
+    Person findPersonById(Integer id);
 
     /**
      * Updates an existing person record.
@@ -54,4 +54,5 @@ public interface PersonService {
      * @return list of error messages
      */
     List<String> validatePerson(Person person);
+
 }

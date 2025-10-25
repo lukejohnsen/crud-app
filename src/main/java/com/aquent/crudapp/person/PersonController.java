@@ -34,7 +34,7 @@ public class PersonController {
     @GetMapping(value = "list")
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView("person/list");
-        mav.addObject("persons", personService.listPeople());
+        mav.addObject("persons", personService.findAll());
         return mav;
     }
 
@@ -82,7 +82,7 @@ public class PersonController {
     @GetMapping(value = "edit/{personId}")
     public ModelAndView edit(@PathVariable Integer personId) {
         ModelAndView mav = new ModelAndView("person/edit");
-        mav.addObject("person", personService.readPerson(personId));
+        mav.addObject("person", personService.findPersonById(personId));
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }
@@ -118,7 +118,7 @@ public class PersonController {
     @GetMapping(value = "delete/{personId}")
     public ModelAndView delete(@PathVariable Integer personId) {
         ModelAndView mav = new ModelAndView("person/delete");
-        mav.addObject("person", personService.readPerson(personId));
+        mav.addObject("person", personService.findPersonById(personId));
         return mav;
     }
 
