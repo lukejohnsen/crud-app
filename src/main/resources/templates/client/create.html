@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Person</title>
+    <title>Create Client</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/js/utils/validation.js"></script>
 </head>
@@ -13,9 +13,9 @@
 <div class="container mx-auto px-6 py-8">
     <div class="max-w-2xl mx-auto">
         <div class="mb-6">
-            <h1 class="text-3xl font-bold mb-4 text-[#f5f5f5]">Edit Person</h1>
+            <h1 class="text-3xl font-bold mb-4 text-[#f5f5f5]">Create Client</h1>
             <div class="flex gap-4">
-                <a href="/person/list" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]" >← Back to List</a>
+                <a href="/client/list" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">← Back to List</a>
                 <a href="/" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">Home</a>
             </div>
         </div>
@@ -34,72 +34,56 @@
         <div id="errorContainer"></div>
 
         <div class="bg-white shadow-md p-8">
-            <form action="/person/edit" method="POST" class="space-y-6" onsubmit="return validatePersonForm(event)">
-                <input type="hidden" name="personId" th:value="${person.personId}"/>
-
+            <form action="/client/create" method="POST" class="space-y-6" onsubmit="return validateClientForm(event)">
                 <div>
-                    <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" th:value="${person.firstName}"
+                    <label for="companyName" class="block text-sm font-medium text-gray-700 mb-2">Company Name:</label>
+                    <input type="text" id="companyName" name="companyName" th:value="${client.companyName}"
                            class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
                 </div>
 
                 <div>
-                    <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" th:value="${person.lastName}"
+                    <label for="websiteUri" class="block text-sm font-medium text-gray-700 mb-2">Website URI:</label>
+                    <input type="text" id="websiteUri" name="websiteUri" th:value="${client.websiteUri}"
                            class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
                 </div>
 
                 <div>
-                    <label for="emailAddress" class="block text-sm font-medium text-gray-700 mb-2">Email Address:</label>
-                    <input type="text" id="emailAddress" name="emailAddress" th:value="${person.emailAddress}"
+                    <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mb-2">Phone Number:</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" th:value="${client.phoneNumber}"
                            class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
                 </div>
 
                 <div>
                     <label for="streetAddress" class="block text-sm font-medium text-gray-700 mb-2">Street Address:</label>
-                    <input type="text" id="streetAddress" name="streetAddress" th:value="${person.streetAddress}"
+                    <input type="text" id="streetAddress" name="streetAddress" th:value="${client.streetAddress}"
                            class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City:</label>
-                        <input type="text" id="city" name="city" th:value="${person.city}"
+                        <input type="text" id="city" name="city" th:value="${client.city}"
                                class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
                     </div>
 
                     <div>
                         <label for="state" class="block text-sm font-medium text-gray-700 mb-2">State:</label>
-                        <input type="text" id="state" name="state" th:value="${person.state}"
+                        <input type="text" id="state" name="state" th:value="${client.state}"
                                class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
                     </div>
 
                     <div>
                         <label for="zipCode" class="block text-sm font-medium text-gray-700 mb-2">Zip Code:</label>
-                        <input type="text" id="zipCode" name="zipCode" th:value="${person.zipCode}"
+                        <input type="text" id="zipCode" name="zipCode" th:value="${client.zipCode}"
                                class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
                     </div>
                 </div>
 
-                <div>
-                    <label for="client" class="block text-sm font-medium text-gray-700 mb-2">Client:</label>
-                    <select id="client" name="client.clientId"
-                            class="w-full px-4 py-2 border border-gray-300 outline-none transition">
-                        <option value="">-- None --</option>
-                        <option th:each="client : ${clients}"
-                                th:value="${client.clientId}"
-                                th:text="${client.companyName}"
-                                th:selected="${person.client != null && person.client.clientId == client.clientId}">
-                            Company Name
-                        </option>
-                    </select>
-                </div>
-
                 <div class="flex gap-4 pt-4">
                     <button type="submit" class="text-white px-6 py-2 font-semibold transition duration-200" style="background-color: #ff5d2a;">
-                        Update Person
+                        Create Client
                     </button>
-                    <a href="/person/list" class="px-6 py-2 font-semibold transition duration-200 inline-block" style="background-color: #382e2d; color: white;">
+                    <a href="/client/list" class="px-6 py-2 font-semibold transition duration-200 inline-block" style="background-color: #382e2d; color: white;">
                         Cancel
                     </a>
                 </div>

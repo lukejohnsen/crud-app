@@ -31,3 +31,4 @@ Add client­side styling and validation:
 * Updated Java to version 17
 * Updated SpringBoot framework to 3+ to work with Java 17
 * Also updated Hibernate Validator to get rid of depreciation errors
+* Refactoring data access to use JPA instead of JDBC

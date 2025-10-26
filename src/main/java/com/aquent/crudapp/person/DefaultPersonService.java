@@ -54,6 +54,7 @@ public class DefaultPersonService implements PersonService {
         personRepository.deleteById(id);
     }
 
+    // JPA provides automatic validation with save(). consider changing later.
     @Override
     public List<String> validatePerson(Person person) {
         Set<ConstraintViolation<Person>> violations = validator.validate(person);

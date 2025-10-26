@@ -1,0 +1,109 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Listing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#382e2d]">
+<div class="container mx-auto px-6 py-8">
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold mb-4 text-[#f5f5f5]">Client Listing</h1>
+        <div class="flex gap-4">
+            <a href="/" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">← Home</a>
+            <a href="/client/create" class="text-white px-4 py-2 transition duration-200 bg-[#ff5d2a]">Create New Client</a>
+            <a href="/person/list" class="text-white px-4 py-2 transition duration-200 bg-[#ff5d2a]">View People</a>
+        </div>
+    </div>
+    <th:block th:unless="${#lists.isEmpty(clients)}">
+        <div class="space-y-6">
+            <th:block th:each="client : ${clients}">
+                <div class="bg-white shadow-md overflow-hidden">
+                    <div class="px-6 py-4 flex justify-between items-center bg-[#ff5d2a]">
+                        <div class="text-white">
+                            <h2 class="text-2xl font-bold" th:text="${client.companyName}">Company Name</h2>
+                            <p class="text-sm mt-1 text-white/90">
+                                <span th:text="${client.city} + ', ' + ${client.state} + ' ' + ${client.zipCode}">City, ST 12345</span>
+                            </p>
+                        </div>
+                        <div class="flex gap-2">
+                            <a th:href="'/client/edit/' + ${client.clientId}"
+                               class="bg-white px-4 py-2 font-medium transition duration-200 text-[#ff5d2a]">
+                                Edit
+                            </a>
+                            <a th:href="'/client/delete/' + ${client.clientId}"
+                               class="text-white px-4 py-2 font-medium transition duration-200 bg-[#382e2d]">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 uppercase">Phone</p>
+                                <p class="text-sm text-gray-900 mt-1" th:text="${client.phoneNumber}">555-1234</p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 uppercase">Website</p>
+                                <a th:href="${client.websiteUri}" target="_blank"
+                                   class="text-sm mt-1 inline-block text-[#ff5d2a]"
+                                   th:text="${client.websiteUri}">www.example.com</a>
+                            </div>
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 uppercase">Address</p>
+                                <p class="text-sm text-gray-900 mt-1" th:text="${client.streetAddress}">123 Main St</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-lg font-semibold text-[#382e2d]">Associated People</h3>
+                            <a th:href="'/person/create?clientId=' + ${client.clientId}"
+                               class="text-white px-3 py-1.5 text-sm font-medium transition duration-200 bg-[#ff5d2a]">
+                                + Add Person
+                            </a>
+                        </div>
+
+                        <th:block th:if="${!#lists.isEmpty(client.persons)}">
+                            <div class="space-y-2">
+                                <div th:each="person : ${client.persons}"
+                                     class="flex justify-between items-center p-3 bg-gray-50 hover:bg-gray-100 transition duration-150">
+                                    <div>
+                                        <p class="font-medium text-gray-900" th:text="${person.firstName + ' ' + person.lastName}">Person Name</p>
+                                        <p class="text-sm text-gray-600" th:text="${person.emailAddress}">email@example.com</p>
+                                    </div>
+                                    <a th:href="'/person/edit/' + ${person.personId}"
+                                       class="text-sm font-medium text-[#ff5d2a]">
+                                        View Details →
+                                    </a>
+                                </div>
+                            </div>
+                        </th:block>
+
+                        <th:block th:if="${#lists.isEmpty(client.persons)}">
+                            <div class="text-center py-8">
+                                <p class="text-gray-400 italic">No persons assigned to this client yet.</p>
+                                <a th:href="'/person/create?clientId=' + ${client.clientId}"
+                                   class="inline-block mt-2 text-sm font-medium text-[#ff5d2a]">
+                                    Add the first person →
+                                </a>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </th:block>
+    <th:block th:if="${#lists.isEmpty(clients)}">
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+            <p class="text-yellow-700">No results found.</p>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

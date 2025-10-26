@@ -1,4 +1,5 @@
 package com.aquent.crudapp.person;
+import com.aquent.crudapp.client.ClientService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,11 @@ public class PersonController {
     public static final String COMMAND_DELETE = "Delete";
 
     private final PersonService personService;
+    private final ClientService clientService;
 
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, ClientService clientService) {
         this.personService = personService;
+        this.clientService = clientService;
     }
 
     /**
@@ -48,6 +51,7 @@ public class PersonController {
         ModelAndView mav = new ModelAndView("person/create");
         mav.addObject("person", new Person());
         mav.addObject("errors", new ArrayList<String>());
+        mav.addObject("clients", clientService.findAll());
         return mav;
     }
 
@@ -68,6 +72,7 @@ public class PersonController {
         } else {
             ModelAndView mav = new ModelAndView("person/create");
             mav.addObject("person", person);
+            mav.addObject("clients", clientService.findAll());
             mav.addObject("errors", errors);
             return mav;
         }
@@ -83,6 +88,7 @@ public class PersonController {
     public ModelAndView edit(@PathVariable Integer personId) {
         ModelAndView mav = new ModelAndView("person/edit");
         mav.addObject("person", personService.findPersonById(personId));
+        mav.addObject("clients", clientService.findAll());
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }
@@ -104,6 +110,7 @@ public class PersonController {
         } else {
             ModelAndView mav = new ModelAndView("person/edit");
             mav.addObject("person", person);
+            mav.addObject("clients", clientService.findAll());
             mav.addObject("errors", errors);
             return mav;
         }

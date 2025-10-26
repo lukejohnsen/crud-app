@@ -1,0 +1,27 @@
+:root {
+    --orange: #ff5d2a;
+    --grey-black: #382e2d;
+}
+
+input:focus, select:focus {
+    border-color: #ff5d2a !important;
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #ff5d2a;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #e54d1a;
+}
+
+.btn-secondary {
+    background-color: #382e2d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #2a2220;
+}

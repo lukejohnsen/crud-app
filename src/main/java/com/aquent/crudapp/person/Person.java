@@ -1,5 +1,5 @@
 package com.aquent.crudapp.person;
-
+import com.aquent.crudapp.client.Client;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.*;
@@ -17,27 +17,27 @@ public class Person {
     private Integer personId;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "First name is required with maximum length of 50")
+    @Size(min = 1, max = 100, message = "First name is required with maximum length of 100")
     @Column(name = "first_name")
     private String firstName;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "Last name is required with maximum length of 50")
+    @Size(min = 1, max = 100, message = "Last name is required with maximum length of 100")
     @Column(name = "last_name")
     private String lastName;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "Email address is required with maximum length of 50")
+    @Size(min = 1, max = 100, message = "Email address is required with maximum length of 100")
     @Column(name = "email_address")
     private String emailAddress;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "Street address is required with maximum length of 50")
+    @Size(min = 1, max = 100, message = "Street address is required with maximum length of 100")
     @Column(name = "street_address")
     private String streetAddress;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "City is required with maximum length of 50")
+    @Size(min = 1, max = 100, message = "City is required with maximum length of 100")
     @Column(name = "city")
     private String city;
 
@@ -50,6 +50,20 @@ public class Person {
     @Size(min = 5, max = 5, message = "Zip code is required with length 5")
     @Column(name = "zip_code")
     private String zipCode;
+
+    // adding many --> one relationship
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    // getter/setter for client
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public Integer getPersonId() {
         return personId;
