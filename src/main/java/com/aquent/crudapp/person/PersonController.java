@@ -38,7 +38,7 @@ public class PersonController {
      * @return list view populated with the current list of people
      */
     @GetMapping(value = "list")
-    public ModelAndView list(@RequestParam(required = false) String letter) {
+    public ModelAndView list(@RequestParam(value = "letter", required = false) String letter) {
         ModelAndView mav = new ModelAndView("person/list");
         if (letter != null && !letter.isEmpty()) {
             mav.addObject("persons", personService.findByFirstNameStartingWith(letter));
@@ -56,7 +56,7 @@ public class PersonController {
      * @return create view populated with an empty person
      */
     @GetMapping(value = "create")
-    public ModelAndView create(@RequestParam(required = false) Integer clientId) {
+    public ModelAndView create(@RequestParam(value="clientId", required = false) Integer clientId) {
         ModelAndView mav = new ModelAndView("person/create");
         Person person = new Person();
         if (clientId != null) {

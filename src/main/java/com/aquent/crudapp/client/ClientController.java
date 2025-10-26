@@ -25,7 +25,7 @@ public class ClientController {
 
     // returns current list of clients
     @GetMapping(value = "list")
-    public ModelAndView list(@RequestParam(required = false) String letter) {
+    public ModelAndView list(@RequestParam(value = "letter", required = false) String letter) {
         ModelAndView mav = new ModelAndView("client/list");
         if (letter != null && !letter.isEmpty()) {
             mav.addObject("clients", clientService.findByCompanyNameStartingWith(letter));
