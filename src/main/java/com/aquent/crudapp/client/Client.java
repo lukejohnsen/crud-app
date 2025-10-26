@@ -49,7 +49,7 @@ public class Client {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client")
     private List<Person> persons;
 
     // getters/setters

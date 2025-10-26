@@ -55,14 +55,9 @@ public class ClientController {
 
     // returns form to edit client
     @GetMapping(value = "edit/{clientId}")
-    public ModelAndView edit(@PathVariable Integer clientId) {
+    public ModelAndView edit(@PathVariable("clientId") Integer clientId) {
         ModelAndView mav = new ModelAndView("client/edit");
-        Client client = clientService.findClientById(clientId);
-        // person list not needed in edit
-        if (client != null) {
-            client.setPersons(null);
-        }
-        mav.addObject("client", client);
+        mav.addObject("client", clientService.findClientById(clientId));
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }
@@ -86,20 +81,15 @@ public class ClientController {
 
     // gets delete confirmation page
     @GetMapping(value = "delete/{clientId}")
-    public ModelAndView delete(@PathVariable Integer clientId) {
+    public ModelAndView delete(@PathVariable("clientId") Integer clientId) {
         ModelAndView mav = new ModelAndView("client/delete");
-        Client client = clientService.findClientById(clientId);
-        // person list not needed in delete
-        if (client != null) {
-            client.setPersons(null);
-        }
-        mav.addObject("client", client);
+        mav.addObject("client", clientService.findClientById(clientId));
         return mav;
     }
 
     // handles delete confirm or cancel, redirects to client list
     @PostMapping(value = "delete")
-    public String delete(@RequestParam String command, @RequestParam Integer clientId) {
+    public String delete(@RequestParam("command") String command, @RequestParam("clientId") Integer clientId) {
         if (COMMAND_DELETE.equals(command)) {
             clientService.deleteClient(clientId);
         }

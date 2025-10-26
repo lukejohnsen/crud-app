@@ -65,7 +65,7 @@ function validateClientForm(event) {
         errors.push('Company address is required and has a maximum length of 100');
     }
 
-    if (city.length > 0 || city.length > 100) {
+    if (city.length === 0 || city.length > 100) {
         errors.push('Company city is required and has a maximum length of 100');
     }
 

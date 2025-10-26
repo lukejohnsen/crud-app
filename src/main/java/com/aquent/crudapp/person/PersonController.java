@@ -88,7 +88,7 @@ public class PersonController {
      * @return edit view populated from the person record
      */
     @GetMapping(value = "edit/{personId}")
-    public ModelAndView edit(@PathVariable Integer personId) {
+    public ModelAndView edit(@PathVariable("personId") Integer personId) {
         ModelAndView mav = new ModelAndView("person/edit");
         mav.addObject("person", personService.findPersonById(personId));
         mav.addObject("clients", clientService.findAll());
@@ -129,7 +129,7 @@ public class PersonController {
      * @return delete view populated from the person record
      */
     @GetMapping(value = "delete/{personId}")
-    public ModelAndView delete(@PathVariable Integer personId) {
+    public ModelAndView delete(@PathVariable("personId") Integer personId) {
         ModelAndView mav = new ModelAndView("person/delete");
         mav.addObject("person", personService.findPersonById(personId));
         return mav;
@@ -143,7 +143,7 @@ public class PersonController {
      * @return redirect to the listing page
      */
     @PostMapping(value = "delete")
-    public String delete(@RequestParam String command, @RequestParam Integer personId) {
+    public String delete(@RequestParam("command") String command, @RequestParam("personId") Integer personId) {
         if (COMMAND_DELETE.equals(command)) {
             personService.deletePerson(personId);
         }
