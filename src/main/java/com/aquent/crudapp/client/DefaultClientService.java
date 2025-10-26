@@ -24,13 +24,13 @@ public class DefaultClientService implements ClientService{
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Client> findAll() {
-        return clientRepository.findAll();
+        return clientRepository.findAllByOrderByCompanyNameAsc();
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Client> findByCompanyNameStartingWith(String letter) {
-        return clientRepository.findByCompanyNameStartingWithIgnoreCase(letter);
+        return clientRepository.findByCompanyNameStartingWithIgnoreCaseOrderByCompanyNameAsc(letter);
     }
 
     @Override

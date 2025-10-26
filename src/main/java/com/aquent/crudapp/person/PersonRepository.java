@@ -8,5 +8,7 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Integer> {
     // JPA automatically gives: save() (for create and update), findById(), findAll(), deleteById(), count()
 
-    List<Person> findByFirstNameStartingWithIgnoreCase(String letter);
+    List<Person> findAllByOrderByFirstNameAscLastNameAsc();
+
+    List<Person> findByFirstNameStartingWithIgnoreCaseOrderByFirstNameAscLastNameAsc(String letter);
 }

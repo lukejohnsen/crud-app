@@ -26,13 +26,13 @@ public class DefaultPersonService implements PersonService {
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Person> findAll() {
-        return personRepository.findAll();
+        return personRepository.findAllByOrderByFirstNameAscLastNameAsc();
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Person> findByFirstNameStartingWith(String letter) {
-        return personRepository.findByFirstNameStartingWithIgnoreCase(letter);
+        return personRepository.findByFirstNameStartingWithIgnoreCaseOrderByFirstNameAscLastNameAsc(letter);
     }
 
     @Override

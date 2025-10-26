@@ -9,5 +9,7 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client, Integer> {
     // JPA automatically gives: save() (for create and update), findById(), findAll(), deleteById(), count()
 
-    List<Client> findByCompanyNameStartingWithIgnoreCase(String letter);
+    List<Client> findAllByOrderByCompanyNameAsc();
+
+    List<Client> findByCompanyNameStartingWithIgnoreCaseOrderByCompanyNameAsc(String letter);
 }
