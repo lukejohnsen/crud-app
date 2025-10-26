@@ -57,7 +57,12 @@ public class ClientController {
     @GetMapping(value = "edit/{clientId}")
     public ModelAndView edit(@PathVariable Integer clientId) {
         ModelAndView mav = new ModelAndView("client/edit");
-        mav.addObject("client", clientService.findClientById(clientId));
+        Client client = clientService.findClientById(clientId);
+        // person list not needed in edit
+        if (client != null) {
+            client.setPersons(null);
+        }
+        mav.addObject("client", client);
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }
@@ -83,7 +88,12 @@ public class ClientController {
     @GetMapping(value = "delete/{clientId}")
     public ModelAndView delete(@PathVariable Integer clientId) {
         ModelAndView mav = new ModelAndView("client/delete");
-        mav.addObject("client", clientService.findClientById(clientId));
+        Client client = clientService.findClientById(clientId);
+        // person list not needed in delete
+        if (client != null) {
+            client.setPersons(null);
+        }
+        mav.addObject("client", client);
         return mav;
     }
 
