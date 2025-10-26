@@ -10,13 +10,13 @@
     <script src="/js/utils/validation.js"></script>
 </head>
 <body class="bg-[#382e2d]">
-<div class="container mx-auto px-6 py-8">
+<div class="container mx-auto px-4 sm:px-6 py-8">
     <div class="max-w-2xl mx-auto">
         <div class="mb-6">
-            <h1 class="text-3xl font-bold mb-4 text-[#f5f5f5]">Edit Person</h1>
-            <div class="flex gap-4">
-                <a href="/person/list" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]" >← Back to List</a>
-                <a href="/" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">Home</a>
+            <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-[#f5f5f5]">Edit Person</h1>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <a href="/person/list" class="text-center text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]" >← Back to List</a>
+                <a href="/" class="text-center text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">Home</a>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
 
         <div id="errorContainer"></div>
 
-        <div class="bg-white shadow-md p-8">
+        <div class="bg-white shadow-md p-6 sm:p-8">
             <form action="/person/edit" method="POST" class="space-y-6" onsubmit="return validatePersonForm(event)">
                 <input type="hidden" name="personId" th:value="${person.personId}"/>
 
@@ -146,11 +146,11 @@
                     </select>
                 </div>
 
-                <div class="flex gap-4 pt-4">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                     <button type="submit" class="text-white px-6 py-2 font-semibold transition duration-200 bg-[#ff5d2a]">
                         Update Person
                     </button>
-                    <a href="/person/list" class="px-6 py-2 font-semibold transition duration-200 inline-block bg-[#382e2d] text-white">
+                    <a href="/person/list" class="text-center px-6 py-2 font-semibold transition duration-200 inline-block bg-[#382e2d] text-white">
                         Cancel
                     </a>
                 </div>
