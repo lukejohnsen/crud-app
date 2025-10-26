@@ -65,6 +65,9 @@ public class PersonController {
      */
     @PostMapping(value = "create")
     public ModelAndView create(Person person) {
+        if (person.getClient() != null && person.getClient().getClientId() == null) {
+            person.setClient(null);
+        }
         List<String> errors = personService.validatePerson(person);
         if (errors.isEmpty()) {
             personService.createPerson(person);
@@ -103,6 +106,9 @@ public class PersonController {
      */
     @PostMapping(value = "edit")
     public ModelAndView edit(Person person) {
+        if (person.getClient() != null && person.getClient().getClientId() == null) {
+            person.setClient(null);
+        }
         List<String> errors = personService.validatePerson(person);
         if (errors.isEmpty()) {
             personService.updatePerson(person);
