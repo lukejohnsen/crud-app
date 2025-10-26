@@ -10,6 +10,14 @@ public interface ClientService {
     List<Client> findAll();
 
     /**
+     * gets client records by company name starting with letter.
+     *
+     * @param letter the starting letter
+     * @return list of client records
+     */
+    List<Client> findByCompanyNameStartingWith(String letter);
+
+    /**
      * this creates a new client record.
      *
      * @param client the values to save

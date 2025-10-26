@@ -31,6 +31,12 @@ public class DefaultPersonService implements PersonService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Person> findByFirstNameStartingWith(String letter) {
+        return personRepository.findByFirstNameStartingWithIgnoreCase(letter);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Person findPersonById(Integer id) {
         return personRepository.findById(id).orElse(null);
     }

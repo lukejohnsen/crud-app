@@ -1,0 +1,72 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Something Went Wrong</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#382e2d]">
+<div class="container mx-auto px-6 py-8">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white shadow-md p-12 max-w-2xl w-full">
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 bg-[#ff5d2a] rounded-full mb-4">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl font-bold text-[#382e2d] mb-4">Something Went Wrong</h1>
+                <p class="text-gray-600 text-lg mb-2">
+                    We're sorry, but an unexpected error occurred while processing your request.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 border-l-4 border-[#ff5d2a] p-6 mb-8">
+                <div class="mb-4">
+                    <p class="text-sm font-medium text-gray-700 mb-1">Error Status:</p>
+                    <p class="text-lg font-semibold text-[#382e2d]" th:text="${status} ?: 'Unknown'">500</p>
+                </div>
+                <div th:if="${error}">
+                    <p class="text-sm font-medium text-gray-700 mb-1">Error Type:</p>
+                    <p class="text-gray-900" th:text="${error}">Internal Server Error</p>
+                </div>
+                <div th:if="${message}" class="mt-4">
+                    <p class="text-sm font-medium text-gray-700 mb-1">Details:</p>
+                    <p class="text-gray-600 text-sm" th:text="${message}">An error occurred</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 pt-8 mb-8">
+                <p class="text-gray-700 mb-6 text-center">You can try one of the following:</p>
+                <div class="space-y-3">
+                    <a href="javascript:history.back()" class="block text-center text-white px-6 py-3 font-semibold transition duration-200 bg-[#ff5d2a] hover:bg-[#e54d1f]">
+                        ← Go Back
+                    </a>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="/" class="flex-1 text-center text-[#ff5d2a] px-6 py-3 font-semibold transition duration-200 bg-gray-100 hover:bg-gray-200">
+                            Go to Home
+                        </a>
+                        <a href="/client/list" class="flex-1 text-center text-[#ff5d2a] px-6 py-3 font-semibold transition duration-200 bg-gray-100 hover:bg-gray-200">
+                            View Clients
+                        </a>
+                        <a href="/person/list" class="flex-1 text-center text-[#ff5d2a] px-6 py-3 font-semibold transition duration-200 bg-gray-100 hover:bg-gray-200">
+                            View People
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center text-sm text-gray-500">
+                <p>If this problem persists, please contact your administrator.</p>
+                <p class="mt-2 text-xs text-gray-400" th:if="${timestamp}">
+                    Error occurred at: <span th:text="${timestamp}">timestamp</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

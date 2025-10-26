@@ -18,6 +18,19 @@
             <a href="/person/list" class="text-white px-4 py-2 transition duration-200 bg-[#ff5d2a]">View People</a>
         </div>
     </div>
+
+    <div class="bg-white shadow-md p-4 mb-6">
+        <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-sm font-medium text-gray-700 mr-2">Filter by:</span>
+            <a href="/client/list" class="px-3 py-1 text-sm font-medium transition duration-200" th:classappend="${selectedLetter == null} ? 'bg-[#ff5d2a] text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'">All</a>
+            <a th:each="letter : ${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')}"
+               th:href="'/client/list?letter=' + ${letter}"
+               th:text="${letter}"
+               class="px-3 py-1 text-sm font-medium transition duration-200"
+               th:classappend="${selectedLetter == letter} ? 'bg-[#ff5d2a] text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'">A</a>
+        </div>
+    </div>
+
     <th:block th:unless="${#lists.isEmpty(clients)}">
         <div class="space-y-6">
             <th:block th:each="client : ${clients}">
@@ -30,6 +43,10 @@
                             </p>
                         </div>
                         <div class="flex gap-2">
+                            <a th:href="'/client/view/' + ${client.clientId}"
+                               class="bg-white px-4 py-2 font-medium transition duration-200 text-[#ff5d2a]">
+                                View
+                            </a>
                             <a th:href="'/client/edit/' + ${client.clientId}"
                                class="bg-white px-4 py-2 font-medium transition duration-200 text-[#ff5d2a]">
                                 Edit
@@ -77,7 +94,7 @@
                                         <p class="font-medium text-gray-900" th:text="${person.firstName + ' ' + person.lastName}">Person Name</p>
                                         <p class="text-sm text-gray-600" th:text="${person.emailAddress}">email@example.com</p>
                                     </div>
-                                    <a th:href="'/person/edit/' + ${person.personId}"
+                                    <a th:href="'/person/view/' + ${person.personId}"
                                        class="text-sm font-medium text-[#ff5d2a]">
                                         View Details →
                                     </a>

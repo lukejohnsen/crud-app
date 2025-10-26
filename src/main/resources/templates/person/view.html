@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Person</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#382e2d]">
+<div class="container mx-auto px-6 py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold mb-4 text-[#f5f5f5]">View Person</h1>
+            <div class="flex gap-4">
+                <a href="/person/list" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">← Back to List</a>
+                <a href="/" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">Home</a>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-md p-8">
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">First Name:</label>
+                        <p class="text-gray-900 text-lg" th:text="${person.firstName}">First Name</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Last Name:</label>
+                        <p class="text-gray-900 text-lg" th:text="${person.lastName}">Last Name</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address:</label>
+                    <p class="text-gray-900 text-lg" th:text="${person.emailAddress}">email@example.com</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Street Address:</label>
+                    <p class="text-gray-900 text-lg" th:text="${person.streetAddress}">123 Main St</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">City:</label>
+                        <p class="text-gray-900 text-lg" th:text="${person.city}">City</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">State:</label>
+                        <p class="text-gray-900 text-lg" th:text="${person.state}">ST</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Zip Code:</label>
+                        <p class="text-gray-900 text-lg" th:text="${person.zipCode}">12345</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Client:</label>
+                    <p class="text-gray-900 text-lg" th:if="${person.client != null}" th:text="${person.client.companyName}">Client Name</p>
+                    <p class="text-gray-500 italic" th:if="${person.client == null}">No client assigned</p>
+                </div>
+
+                <div class="flex gap-4 pt-4 border-t border-gray-200">
+                    <a th:href="'/person/edit/' + ${person.personId}" class="text-white px-6 py-2 font-semibold transition duration-200 bg-[#ff5d2a]">
+                        Edit Person
+                    </a>
+                    <a th:href="'/person/delete/' + ${person.personId}" class="px-6 py-2 font-semibold transition duration-200 bg-[#382e2d] text-white">
+                        Delete Person
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

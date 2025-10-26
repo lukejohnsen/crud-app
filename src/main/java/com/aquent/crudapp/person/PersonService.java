@@ -18,6 +18,13 @@ public interface PersonService {
     List<Person> findAll();
 
     /**
+     * gets person data by first name starting with letter.
+     *
+     * @param letter the starting letter
+     * @return list of person records
+     */
+    List<Person> findByFirstNameStartingWith(String letter);
+    /**
      * Creates a new person record.
      *
      * @param person the values to save

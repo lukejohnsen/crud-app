@@ -70,8 +70,59 @@
 
                     <div>
                         <label for="state" class="block text-sm font-medium text-gray-700 mb-2">State:</label>
-                        <input type="text" id="state" name="state" th:value="${client.state}"
-                               class="w-full px-4 py-2 border border-gray-300 outline-none transition"/>
+                        <select id="state" name="state" class="w-full px-4 py-2 border border-gray-300 outline-none transition">
+                            <option value="">-- Select State --</option>
+                            <option value="AL" th:selected="${client.state == 'AL'}">AL</option>
+                            <option value="AK" th:selected="${client.state == 'AK'}">AK</option>
+                            <option value="AZ" th:selected="${client.state == 'AZ'}">AZ</option>
+                            <option value="AR" th:selected="${client.state == 'AR'}">AR</option>
+                            <option value="CA" th:selected="${client.state == 'CA'}">CA</option>
+                            <option value="CO" th:selected="${client.state == 'CO'}">CO</option>
+                            <option value="CT" th:selected="${client.state == 'CT'}">CT</option>
+                            <option value="DE" th:selected="${client.state == 'DE'}">DE</option>
+                            <option value="FL" th:selected="${client.state == 'FL'}">FL</option>
+                            <option value="GA" th:selected="${client.state == 'GA'}">GA</option>
+                            <option value="HI" th:selected="${client.state == 'HI'}">HI</option>
+                            <option value="ID" th:selected="${client.state == 'ID'}">ID</option>
+                            <option value="IL" th:selected="${client.state == 'IL'}">IL</option>
+                            <option value="IN" th:selected="${client.state == 'IN'}">IN</option>
+                            <option value="IA" th:selected="${client.state == 'IA'}">IA</option>
+                            <option value="KS" th:selected="${client.state == 'KS'}">KS</option>
+                            <option value="KY" th:selected="${client.state == 'KY'}">KY</option>
+                            <option value="LA" th:selected="${client.state == 'LA'}">LA</option>
+                            <option value="ME" th:selected="${client.state == 'ME'}">ME</option>
+                            <option value="MD" th:selected="${client.state == 'MD'}">MD</option>
+                            <option value="MA" th:selected="${client.state == 'MA'}">MA</option>
+                            <option value="MI" th:selected="${client.state == 'MI'}">MI</option>
+                            <option value="MN" th:selected="${client.state == 'MN'}">MN</option>
+                            <option value="MS" th:selected="${client.state == 'MS'}">MS</option>
+                            <option value="MO" th:selected="${client.state == 'MO'}">MO</option>
+                            <option value="MT" th:selected="${client.state == 'MT'}">MT</option>
+                            <option value="NE" th:selected="${client.state == 'NE'}">NE</option>
+                            <option value="NV" th:selected="${client.state == 'NV'}">NV</option>
+                            <option value="NH" th:selected="${client.state == 'NH'}">NH</option>
+                            <option value="NJ" th:selected="${client.state == 'NJ'}">NJ</option>
+                            <option value="NM" th:selected="${client.state == 'NM'}">NM</option>
+                            <option value="NY" th:selected="${client.state == 'NY'}">NY</option>
+                            <option value="NC" th:selected="${client.state == 'NC'}">NC</option>
+                            <option value="ND" th:selected="${client.state == 'ND'}">ND</option>
+                            <option value="OH" th:selected="${client.state == 'OH'}">OH</option>
+                            <option value="OK" th:selected="${client.state == 'OK'}">OK</option>
+                            <option value="OR" th:selected="${client.state == 'OR'}">OR</option>
+                            <option value="PA" th:selected="${client.state == 'PA'}">PA</option>
+                            <option value="RI" th:selected="${client.state == 'RI'}">RI</option>
+                            <option value="SC" th:selected="${client.state == 'SC'}">SC</option>
+                            <option value="SD" th:selected="${client.state == 'SD'}">SD</option>
+                            <option value="TN" th:selected="${client.state == 'TN'}">TN</option>
+                            <option value="TX" th:selected="${client.state == 'TX'}">TX</option>
+                            <option value="UT" th:selected="${client.state == 'UT'}">UT</option>
+                            <option value="VT" th:selected="${client.state == 'VT'}">VT</option>
+                            <option value="VA" th:selected="${client.state == 'VA'}">VA</option>
+                            <option value="WA" th:selected="${client.state == 'WA'}">WA</option>
+                            <option value="WV" th:selected="${client.state == 'WV'}">WV</option>
+                            <option value="WI" th:selected="${client.state == 'WI'}">WI</option>
+                            <option value="WY" th:selected="${client.state == 'WY'}">WY</option>
+                        </select>
                     </div>
 
                     <div>

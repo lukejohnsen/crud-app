@@ -8,6 +8,9 @@ function validatePersonForm(event) {
     const state = document.getElementById('state').value.trim();
     const zipCode = document.getElementById('zipCode').value.trim();
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const zipCodeRegex = /^\d{5}$/;
+
     if (firstName.length === 0 || firstName.length > 100) {
         errors.push('Contact first name is required with a maximum length of 100');
     }
@@ -16,8 +19,12 @@ function validatePersonForm(event) {
         errors.push('Contact last name is required with a maximum length of 100');
     }
 
-    if (emailAddress.length === 0 || emailAddress.length > 100) {
-        errors.push('Contact email address is required with a maximum length of 100');
+    if (emailAddress.length === 0) {
+        errors.push('Contact email address is required');
+    } else if (!emailRegex.test(emailAddress)) {
+        errors.push('Contact email address must be a valid email format');
+    } else if (emailAddress.length > 100) {
+        errors.push('Contact email address has a maximum length of 100');
     }
 
     if (streetAddress.length === 0 || streetAddress.length > 100) {
@@ -28,12 +35,14 @@ function validatePersonForm(event) {
         errors.push('Contact city is required with a maximum length of 100');
     }
 
-    if (state.length !== 2) {
-        errors.push('Contact state abbreviation is required with a length of two');
+    if (state.length === 0) {
+        errors.push('Contact state is required');
     }
 
-    if (zipCode.length !== 5) {
-        errors.push('Zip code is required with a length 5');
+    if (zipCode.length === 0) {
+        errors.push('Zip code is required');
+    } else if (!zipCodeRegex.test(zipCode)) {
+        errors.push('Zip code must be exactly 5 digits');
     }
 
     return displayErrors(errors, event);
@@ -49,6 +58,9 @@ function validateClientForm(event) {
     const state = document.getElementById('state').value.trim();
     const zipCode = document.getElementById('zipCode').value.trim();
 
+    const zipCodeRegex = /^\d{5}$/;
+    const phoneRegex = /^[\d\s\-\(\)\+\.]+$/;
+
     if (companyName.length === 0 || companyName.length > 100) {
         errors.push('Company name is required with a maximum length of 100');
     }
@@ -57,8 +69,14 @@ function validateClientForm(event) {
         errors.push('Company website URI is required has a maximum length of 100');
     }
 
-    if (phoneNumber.length === 0 || phoneNumber.length > 20) {
-        errors.push('Company phone number is require has a maximum length of 20');
+    if (phoneNumber.length === 0) {
+        errors.push('Company phone number is required');
+    } else if (!phoneRegex.test(phoneNumber)) {
+        errors.push('Please enter a valid phone number');
+    } else if (phoneNumber.replace(/\D/g, '').length < 10) {
+        errors.push('Phone number must contain at least 10 digits');
+    } else if (phoneNumber.length > 20) {
+        errors.push('Company phone number has a maximum length of 20');
     }
 
     if (streetAddress.length === 0 || streetAddress.length > 100) {
@@ -69,12 +87,14 @@ function validateClientForm(event) {
         errors.push('Company city is required and has a maximum length of 100');
     }
 
-    if (state.length !== 2) {
-        errors.push('Company state abbreviation must be two characters');
+    if (state.length === 0) {
+        errors.push('Company state is required');
     }
 
-    if (zipCode.length !== 5) {
-        errors.push('Zip code is required with length 5');
+    if (zipCode.length === 0) {
+        errors.push('Zip code is required');
+    } else if (!zipCodeRegex.test(zipCode)) {
+        errors.push('Zip code must be exactly 5 digits');
     }
 
     return displayErrors(errors, event);

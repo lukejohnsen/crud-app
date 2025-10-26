@@ -14,10 +14,23 @@
         <h1 class="text-3xl font-bold mb-4 text-[#f5f5f5]">Person Listing</h1>
         <div class="flex gap-4">
             <a href="/" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">← Home</a>
-            <a href="/person/create" class="text-white px-4 py-2 transition duration-200" style="background-color: #ff5d2a;">Create New Person</a>
-            <a href="/client/list" class="text-white px-4 py-2 transition duration-200" style="background-color: #ff5d2a;">View Clients</a>
+            <a href="/person/create" class="text-white px-4 py-2 transition duration-200 bg-[#ff5d2a]">Create New Person</a>
+            <a href="/client/list" class="text-white px-4 py-2 transition duration-200 bg-[#ff5d2a]">View Clients</a>
         </div>
     </div>
+
+    <div class="bg-white shadow-md p-4 mb-6">
+        <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-sm font-medium text-gray-700 mr-2">Browse by name:</span>
+            <a href="/person/list" class="px-3 py-1 text-sm font-medium transition duration-200" th:classappend="${selectedLetter == null} ? 'bg-[#ff5d2a] text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'">All</a>
+            <a th:each="letter : ${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')}"
+               th:href="'/person/list?letter=' + ${letter}"
+               th:text="${letter}"
+               class="px-3 py-1 text-sm font-medium transition duration-200"
+               th:classappend="${selectedLetter == letter} ? 'bg-[#ff5d2a] text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'">A</a>
+        </div>
+    </div>
+
     <th:block th:unless="${#lists.isEmpty(persons)}">
         <div class="bg-white shadow-md overflow-hidden">
             <table class="min-w-full divide-y divide-gray-200">
@@ -38,8 +51,9 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600" th:text="${person.emailAddress}">first.last@email.com</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600" th:text="${person.client != null ? person.client.companyName : 'None'}">Company</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                            <a th:href="'/person/edit/' + ${person.personId}" style="color: #ff5d2a;">Edit</a>
-                            <a th:href="'/person/delete/' + ${person.personId}" style="color: #382e2d;">Delete</a>
+                            <a th:href="'/person/view/' + ${person.personId}" class="text-[#ff5d2a]">View</a>
+                            <a th:href="'/person/edit/' + ${person.personId}" class="text-[#ff5d2a]">Edit</a>
+                            <a th:href="'/person/delete/' + ${person.personId}" class="text-[#382e2d]">Delete</a>
                         </td>
                     </tr>
                 </th:block>

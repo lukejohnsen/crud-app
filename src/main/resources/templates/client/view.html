@@ -1,0 +1,130 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Client</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#382e2d]">
+<div class="container mx-auto px-6 py-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold mb-4 text-[#f5f5f5]">View Client</h1>
+            <div class="flex gap-4">
+                <a href="/client/list" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">← Back to List</a>
+                <a href="/" class="text-[#382e2d] px-4 py-2 transition duration-200 bg-[#f5f5f5]">Home</a>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-md p-8 mb-6">
+            <h2 class="text-2xl font-bold text-[#382e2d] mb-6 pb-4 border-b border-gray-200">Client Information</h2>
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Company Name:</label>
+                    <p class="text-gray-900 text-lg" th:text="${client.companyName}">Company Name</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Website URI:</label>
+                        <a th:href="${client.websiteUri}" target="_blank" class="text-lg text-[#ff5d2a] hover:underline" th:text="${client.websiteUri}">www.example.com</a>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number:</label>
+                        <p class="text-gray-900 text-lg" th:text="${client.phoneNumber}">555-1234</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Street Address:</label>
+                    <p class="text-gray-900 text-lg" th:text="${client.streetAddress}">123 Main St</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">City:</label>
+                        <p class="text-gray-900 text-lg" th:text="${client.city}">City</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">State:</label>
+                        <p class="text-gray-900 text-lg" th:text="${client.state}">ST</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Zip Code:</label>
+                        <p class="text-gray-900 text-lg" th:text="${client.zipCode}">12345</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 pt-4 border-t border-gray-200">
+                    <a th:href="'/client/edit/' + ${client.clientId}" class="text-white px-6 py-2 font-semibold transition duration-200 bg-[#ff5d2a]">
+                        Edit Client
+                    </a>
+                    <a th:href="'/client/delete/' + ${client.clientId}" class="px-6 py-2 font-semibold transition duration-200 bg-[#382e2d] text-white">
+                        Delete Client
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-md p-8">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+                <h2 class="text-2xl font-bold text-[#382e2d]">Associated People</h2>
+                <a th:href="'/person/create?clientId=' + ${client.clientId}" class="text-white px-4 py-2 font-semibold transition duration-200 bg-[#ff5d2a]">
+                    + Add Person
+                </a>
+            </div>
+
+            <th:block th:if="${!#lists.isEmpty(client.persons)}">
+                <div class="space-y-4">
+                    <div th:each="person : ${client.persons}" class="border border-gray-200 p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-900" th:text="${person.firstName + ' ' + person.lastName}">Person Name</h3>
+                            <a th:href="'/person/view/' + ${person.personId}" class="text-sm font-medium text-[#ff5d2a] hover:underline">
+                                View Full Details →
+                            </a>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 uppercase mb-1">Email Address:</label>
+                                <p class="text-gray-900" th:text="${person.emailAddress}">email@example.com</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 uppercase mb-1">Phone:</label>
+                                <p class="text-gray-900" th:text="${person.streetAddress}">Street Address</p>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-medium text-gray-500 uppercase mb-1">Address:</label>
+                                <p class="text-gray-900">
+                                    <span th:text="${person.streetAddress}">123 Main St</span>,
+                                    <span th:text="${person.city}">City</span>,
+                                    <span th:text="${person.state}">ST</span>
+                                    <span th:text="${person.zipCode}">12345</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+            <th:block th:if="${#lists.isEmpty(client.persons)}">
+                <div class="text-center py-12">
+                    <p class="text-gray-400 italic mb-4">No persons assigned to this client yet.</p>
+                    <a th:href="'/person/create?clientId=' + ${client.clientId}" class="inline-block text-sm font-medium text-[#ff5d2a] hover:underline">
+                        Add the first person →
+                    </a>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

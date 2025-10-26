@@ -20,5 +20,5 @@ CREATE TABLE person (
     state varchar(2) NOT NULL,
     zip_code varchar(5) NOT NULL,
     client_id integer,
-    CONSTRAINT fk_person_client FOREIGN KEY (client_id) REFERENCES client(client_id)
+    CONSTRAINT fk_person_client FOREIGN KEY (client_id) REFERENCES client(client_id) ON DELETE SET NULL
 );

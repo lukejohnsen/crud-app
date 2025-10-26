@@ -3,12 +3,14 @@ package com.aquent.crudapp.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,9 +25,14 @@ public class ClientController {
 
     // returns current list of clients
     @GetMapping(value = "list")
-    public ModelAndView list() {
+    public ModelAndView list(@RequestParam(required = false) String letter) {
         ModelAndView mav = new ModelAndView("client/list");
-        mav.addObject("clients", clientService.findAll());
+        if (letter != null && !letter.isEmpty()) {
+            mav.addObject("clients", clientService.findByCompanyNameStartingWith(letter));
+            mav.addObject("selectedLetter", letter.toUpperCase());
+        } else {
+            mav.addObject("clients", clientService.findAll());
+        }
         return mav;
     }
 
@@ -53,11 +60,27 @@ public class ClientController {
         }
     }
 
+    // returns read-only view of client
+    @GetMapping(value = "view/{clientId}")
+    public ModelAndView view(@PathVariable("clientId") Integer clientId) {
+        Client client = clientService.findClientById(clientId);
+        if (client == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
+        }
+        ModelAndView mav = new ModelAndView("client/view");
+        mav.addObject("client", client);
+        return mav;
+    }
+
     // returns form to edit client
     @GetMapping(value = "edit/{clientId}")
     public ModelAndView edit(@PathVariable("clientId") Integer clientId) {
+        Client client = clientService.findClientById(clientId);
+        if (client == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
+        }
         ModelAndView mav = new ModelAndView("client/edit");
-        mav.addObject("client", clientService.findClientById(clientId));
+        mav.addObject("client", client);
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }
@@ -82,8 +105,12 @@ public class ClientController {
     // gets delete confirmation page
     @GetMapping(value = "delete/{clientId}")
     public ModelAndView delete(@PathVariable("clientId") Integer clientId) {
+        Client client = clientService.findClientById(clientId);
+        if (client == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
+        }
         ModelAndView mav = new ModelAndView("client/delete");
-        mav.addObject("client", clientService.findClientById(clientId));
+        mav.addObject("client", client);
         return mav;
     }
 

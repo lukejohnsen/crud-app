@@ -29,6 +29,12 @@ public class DefaultClientService implements ClientService{
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Client> findByCompanyNameStartingWith(String letter) {
+        return clientRepository.findByCompanyNameStartingWithIgnoreCase(letter);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Client findClientById(Integer id) {
         return clientRepository.findById(id).orElse(null);
     }
